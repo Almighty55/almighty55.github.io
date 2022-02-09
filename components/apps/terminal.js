@@ -12,12 +12,12 @@ export class Terminal extends Component {
         this.prev_commands = [];
         this.commands_index = -1;
         this.child_directories = {
-            root: ["books", "projects", "personal-documents", "skills", "languages", "interests"],
-            books: ["Eric-Jorgenson_The-Almanack-of-Naval-Ravikant.pdf", "Elon Musk: How the Billionaire CEO of SpaceX.pdf", "The $100 Startup_CHRIS_GUILLEBEAU.pdf", "The_Magic_of_Thinking_Big.pdf"],
-            skills: ["Front-end development", "React.js", "jQuery", "Flutter", "Express.js", "SQL", "Firebase"],
+            root: ["projects", "personal-documents", "skills", "languages", "interests"],
+            // books: ["Eric-Jorgenson_The-Almanack-of-Naval-Ravikant.pdf", "Elon Musk: How the Billionaire CEO of SpaceX.pdf", "The $100 Startup_CHRIS_GUILLEBEAU.pdf", "The_Magic_of_Thinking_Big.pdf"],
+            skills: ["AWS", "Windows Server", "Azure", "Security"],
             projects: ["adam-personal-portfolio", "SFTP-Automation", "Enterprise Support PowerShell Module", "Remote-Desktop-Services-Cluster", "Pulumi-Okta-Management"],
             interests: ["Technology", "Finance", "Sports"],
-            languages: ["PowerShell", "Python", "HTML", "CSS"],
+            languages: ["PowerShell", "Python", "Terraform", "Pulumi"],
         };
         this.state = {
             terminal: [],
@@ -312,7 +312,16 @@ export class Terminal extends Component {
                     action: "lol",
                 });
 
-                result = "<img class=' w-2/5' src='./images/memes/used-sudo-command.gif' />";
+                result = "Hacker man\n<img class=' w-2/5' src='./images/memes/used-sudo-command.gif' />";
+                break;
+            case "Sudo":
+
+                ReactGA.event({
+                    category: "Sudo Access",
+                    action: "lol",
+                });
+
+                result = "Hacker man\n<img class=' w-2/5' src='./images/memes/used-sudo-command.gif' />";
                 break;
             default:
                 result = "Command '" + main + "' not found, or not yet implemented.<br>Available Commands: [ cd, ls, pwd, echo, clear, exit, mkdir, code, soundcloud, chrome, about-adam, trash, settings, sendmsg ]";
