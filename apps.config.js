@@ -61,7 +61,7 @@ const apps = [
         disabled: false,
         favorite: true,
         desktop_shortcut: false,
-        screen: displaySoundCloud, // Top 50 - USA Playlist 😅
+        screen: displaySoundCloud,
     },
     {
         id: "settings",

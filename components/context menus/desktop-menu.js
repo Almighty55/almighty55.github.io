@@ -48,13 +48,13 @@ function DesktopMenu(props) {
                 <span className="ml-5">New Folder</span>
             </div>
             <Devider />
-            <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
+            {/* <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
                 <span className="ml-5">Paste</span>
-            </div>
+            </div> */}
             <Devider />
-            <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
+            {/* <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
                 <span className="ml-5">Show Desktop in Files</span>
-            </div>
+            </div> */}
             <div onClick={openTerminal} className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5">
                 <span className="ml-5">Open in Terminal</span>
             </div>
@@ -63,9 +63,9 @@ function DesktopMenu(props) {
                 <span className="ml-5">Change Background...</span>
             </div>
             <Devider />
-            <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
+            {/* <div className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5 text-gray-400">
                 <span className="ml-5">Display Settings</span>
-            </div>
+            </div> */}
             <div onClick={openSettings} className="w-full py-0.5 hover:bg-ub-warm-grey hover:bg-opacity-20 mb-1.5">
                 <span className="ml-5">Settings</span>
             </div>

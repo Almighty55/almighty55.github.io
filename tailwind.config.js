@@ -27,6 +27,7 @@ module.exports = {
       'ubt-gedit-orange': "#F39A21",
       'ubt-gedit-blue': "#50B6C6",
       'ubt-gedit-dark': "#003B70",
+      'career-neon-green': "#00ff00",
     }),
     borderColor: theme => ({
       ...theme('colors'),
@@ -50,7 +51,7 @@ module.exports = {
     extend: {
       zIndex: {
         '-10': '-10',
-      }
+      },
     },
   },
   variants: {
