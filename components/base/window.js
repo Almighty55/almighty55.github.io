@@ -25,30 +25,30 @@ export class Window extends Component {
 
     componentDidMount() {
         this.id = this.props.id;
-        this.setDefaultWindowDimenstion();
+        this.setDefaultWindowDimension();
 
         // google analytics
         ReactGA.pageview(`/${this.id}`);
 
         // on window resize, resize boundary
-        window.addEventListener('resize', this.resizeBoundries);
+        window.addEventListener('resize', this.resizeBoundaries);
     }
 
     componentWillUnmount() {
         ReactGA.pageview("/desktop");
-        window.removeEventListener('resize', this.resizeBoundries);
+        window.removeEventListener('resize', this.resizeBoundaries);
     }
 
-    setDefaultWindowDimenstion = () => {
+    setDefaultWindowDimension = () => {
         if (window.innerWidth < 640) {
-            this.setState({ height: 60, width: 85 }, this.resizeBoundries);
+            this.setState({ height: 60, width: 85 }, this.resizeBoundaries);
         }
         else {
-            this.setState({ height: 85, width: 60 }, this.resizeBoundries);
+            this.setState({ height: 85, width: 60 }, this.resizeBoundaries);
         }
     }
 
-    resizeBoundries = () => {
+    resizeBoundaries = () => {
         this.setState({
             parentSize: {
                 height: window.innerHeight //parent height
@@ -73,15 +73,15 @@ export class Window extends Component {
         this.setState({ cursorType: "cursor-default" })
     }
 
-    handleVerticleResize = () => {
-        this.setState({ height: this.state.height + 0.1 }, this.resizeBoundries);
+    handleVerticalResize = () => {
+        this.setState({ height: this.state.height + 0.1 }, this.resizeBoundaries);
     }
 
     handleHorizontalResize = () => {
-        this.setState({ width: this.state.width + 0.1 }, this.resizeBoundries);
+        this.setState({ width: this.state.width + 0.1 }, this.resizeBoundaries);
     }
 
-    setWinowsPosition = () => {
+    setWindowsPosition = () => {
         var r = document.querySelector("#" + this.id);
         var rect = r.getBoundingClientRect();
         r.style.setProperty('--window-transform-x', rect.x.toFixed(1).toString() + "px");
@@ -91,7 +91,7 @@ export class Window extends Component {
     checkOverlap = () => {
         var r = document.querySelector("#" + this.id);
         var rect = r.getBoundingClientRect();
-        if (rect.x.toFixed(1) < 50) { // if this window overlapps with SideBar
+        if (rect.x.toFixed(1) < 50) { // if this window overlaps with SideBar
             this.props.hideSideBar(this.id, true);
         }
         else {
@@ -108,20 +108,20 @@ export class Window extends Component {
         if (this.state.maximized) {
             posx = -510;
         }
-        this.setWinowsPosition();
-        // get corrosponding sidebar app's position
+        this.setWindowsPosition();
+        // get corresponding sidebar app's position
         var r = document.querySelector("#sidebar-" + this.id);
-        var sidebBarApp = r.getBoundingClientRect();
+        var sideBarApp = r.getBoundingClientRect();
 
         r = document.querySelector("#" + this.id);
         // translate window to that position
-        r.style.transform = `translate(${posx}px,${sidebBarApp.y.toFixed(1) - 240}px) scale(0.2)`;
-        this.props.hasMinimised(this.id);
+        r.style.transform = `translate(${posx}px,${sideBarApp.y.toFixed(1) - 240}px) scale(0.2)`;
+        this.props.hasMinimized(this.id);
     }
 
     restoreWindow = () => {
         var r = document.querySelector("#" + this.id);
-        this.setDefaultWindowDimenstion();
+        this.setDefaultWindowDimension();
         // get previous position
         let posx = r.style.getPropertyValue("--window-transform-x");
         let posy = r.style.getPropertyValue("--window-transform-y");
@@ -140,7 +140,7 @@ export class Window extends Component {
         else {
             this.focusWindow();
             var r = document.querySelector("#" + this.id);
-            this.setWinowsPosition();
+            this.setWindowsPosition();
             // translate window to maximize position
             r.style.transform = `translate(-1pt,-2pt)`;
             this.setState({ maximized: true, height: 96.3, width: 100.2 });
@@ -149,7 +149,7 @@ export class Window extends Component {
     }
 
     closeWindow = () => {
-        this.setWinowsPosition();
+        this.setWindowsPosition();
         this.setState({ closed: true }, () => {
             this.props.hideSideBar(this.id, false);
             setTimeout(() => {
@@ -177,9 +177,9 @@ export class Window extends Component {
                     id={this.id}
                 >
                     <WindowYBorder resize={this.handleHorizontalResize} />
-                    <WindowXBorder resize={this.handleVerticleResize} />
+                    <WindowXBorder resize={this.handleVerticalResize} />
                     <WindowTopBar title={this.props.title} />
-                    <WindowEditButtons minimize={this.minimizeWindow} maximize={this.maximizeWindow} isMaximised={this.state.maximized} close={this.closeWindow} id={this.id} />
+                    <WindowEditButtons minimize={this.minimizeWindow} maximize={this.maximizeWindow} isMaximized={this.state.maximized} close={this.closeWindow} id={this.id} />
                     {(this.id === "settings"
                         ? <Settings changeBackgroundImage={this.props.changeBackgroundImage} currBgImgName={this.props.bg_image_name} />
                         : <WindowMainScreen screen={this.props.screen} title={this.props.title}
@@ -243,7 +243,7 @@ export function WindowEditButtons(props) {
                 />
             </span>
             {
-                (props.isMaximised
+                (props.isMaximized
                     ?
                     <span className="mx-2 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-5 w-5 items-center" onClick={props.maximize}>
                         <img

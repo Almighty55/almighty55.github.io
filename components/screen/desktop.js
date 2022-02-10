@@ -70,6 +70,17 @@ export class Desktop extends Component {
         }
     }
 
+    checkForFirstVisit = () => {
+        var first_Visit = localStorage.getItem('first_Visit');
+        if (first_Visit === null && first_Visit !== undefined) {
+
+        }
+        else {
+        // user has visited before  - don't reopen aboutMe
+            localStorage.setItem("first_Visit", JSON.stringify([]));
+        }
+    }
+
     setEventListeners = () => {
         document.getElementById("open-settings").addEventListener("click", () => {
             this.openApp("settings");
@@ -266,7 +277,7 @@ export class Desktop extends Component {
                     focus: this.focus,
                     isFocused: this.state.focused_windows[app.id],
                     hideSideBar: this.hideSideBar,
-                    hasMinimised: this.hasMinimised,
+                    hasMinimized: this.hasMinimized,
                     minimized: this.state.minimized_windows[app.id],
                     changeBackgroundImage: this.props.changeBackgroundImage,
                     bg_image_name: this.props.bg_image_name,
@@ -309,7 +320,7 @@ export class Desktop extends Component {
         this.setState({ hideSideBar: hide, overlapped_windows });
     }
 
-    hasMinimised = (objId) => {
+    hasMinimized = (objId) => {
         let minimized_windows = this.state.minimized_windows;
         var focused_windows = this.state.focused_windows;
 
@@ -402,7 +413,7 @@ export class Desktop extends Component {
 
             setTimeout(() => {
                 favorite_apps[objId] = true; // adds opened app to sideBar
-                closed_windows[objId] = false; // openes app's window
+                closed_windows[objId] = false; // opens app's window
                 this.setState({ closed_windows, favorite_apps, allAppsView: false }, this.focus(objId));
                 this.app_stack.push(objId);
             }, 200);
