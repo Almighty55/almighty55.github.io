@@ -17,6 +17,7 @@ export default class Ubuntu extends Component {
 
 	componentDidMount() {
 		this.getLocalData();
+		this.lockScreen(); // show lock screen on each visit
 	}
 
 	setTimeOutBootScreen = () => {
@@ -49,7 +50,7 @@ export default class Ubuntu extends Component {
 			// Get previous lock screen state
 			let screen_locked = localStorage.getItem('screen-locked');
 			if (screen_locked !== null && screen_locked !== undefined) {
-				this.setState({ screen_locked: screen_locked === 'true' ? true : false });
+				this.setState({ screen_locked: screen_locked === 'true' ? true : false })
 			}
 		}
 	};
