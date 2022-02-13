@@ -8,7 +8,6 @@ import AllApplications from '../screen/all-applications'
 import DesktopMenu from '../context menus/desktop-menu';
 import DefaultMenu from '../context menus/default';
 import $ from 'jquery';
-import ReactGA from 'react-ga';
 
 export class Desktop extends Component {
     constructor() {
@@ -31,17 +30,35 @@ export class Desktop extends Component {
                 default: false,
             },
             showNameBar: false,
+            first_visit: true
         }
     }
 
     componentDidMount() {
-        // google analytics
-        ReactGA.pageview("/desktop");
-
         this.fetchAppsData();
         this.setContextListeners();
         this.setEventListeners();
         this.checkForNewFolders();
+        this.checkForFirstVisit();
+    }
+
+    checkForFirstVisit = () => {
+        let first_visit = localStorage.getItem('booting_screen');
+		if (first_visit !== null && first_visit !== undefined) {
+			// user has visited site before
+			this.setState({ first_visit: false });
+		} else {
+            // user is visiting site for the first time
+            let closed_windows = this.state.closed_windows;
+            let favorite_apps = this.state.favorite_apps;
+
+            setTimeout(() => {
+                favorite_apps["about-adam"] = true; // adds opened app to sideBar
+                closed_windows["about-adam"] = false; // opens app's window
+                this.setState({ closed_windows, allAppsView: false }, this.focus("about-adam"));
+                this.app_stack.push("about-adam");
+            }, 200);
+        }
     }
 
     componentWillUnmount() {
@@ -70,17 +87,6 @@ export class Desktop extends Component {
         }
     }
 
-    checkForFirstVisit = () => {
-        var first_Visit = localStorage.getItem('first_Visit');
-        if (first_Visit === null && first_Visit !== undefined) {
-
-        }
-        else {
-        // user has visited before  - don't reopen aboutMe
-            localStorage.setItem("first_Visit", JSON.stringify([]));
-        }
-    }
-
     setEventListeners = () => {
         document.getElementById("open-settings").addEventListener("click", () => {
             this.openApp("settings");
@@ -103,17 +109,9 @@ export class Desktop extends Component {
         this.hideAllContextMenu();
         switch (e.target.dataset.context) {
             case "desktop-area":
-                ReactGA.event({
-                    category: `Context Menu`,
-                    action: `Opened Desktop Context Menu`
-                });
                 this.showContextMenu(e, "desktop");
                 break;
             default:
-                ReactGA.event({
-                    category: `Context Menu`,
-                    action: `Opened Default Context Menu`
-                });
                 this.showContextMenu(e, "default");
         }
     }
@@ -324,7 +322,7 @@ export class Desktop extends Component {
         let minimized_windows = this.state.minimized_windows;
         var focused_windows = this.state.focused_windows;
 
-        // remove focus and minimise this window
+        // remove focus and minimize this window
         minimized_windows[objId] = true;
         focused_windows[objId] = false;
         this.setState({ minimized_windows, focused_windows });
@@ -335,8 +333,8 @@ export class Desktop extends Component {
     }
 
     giveFocusToLastApp = () => {
-        // if there is atleast one app opened, give it focus
-        if (!this.checkAllMinimised()) {
+        // if there is at least one app opened, give it focus
+        if (!this.checkAllMinimized()) {
             for (const index in this.app_stack) {
                 if (!this.state.minimized_windows[this.app_stack[index]]) {
                     this.focus(this.app_stack[index]);
@@ -346,7 +344,7 @@ export class Desktop extends Component {
         }
     }
 
-    checkAllMinimised = () => {
+    checkAllMinimized = () => {
         let result = true;
         for (const key in this.state.minimized_windows) {
             if (!this.state.closed_windows[key]) { // if app is opened
@@ -357,13 +355,6 @@ export class Desktop extends Component {
     }
 
     openApp = (objId) => {
-
-        // google analytics
-        ReactGA.event({
-            category: `Open App`,
-            action: `Opened ${objId} window`
-        });
-
         // if the app is disabled
         if (this.state.disabled_apps[objId]) return;
 
@@ -375,7 +366,7 @@ export class Desktop extends Component {
             var r = document.querySelector("#" + objId);
             r.style.transform = `translate(${r.style.getPropertyValue("--window-transform-x")},${r.style.getPropertyValue("--window-transform-y")}) scale(1)`;
 
-            // tell childs that his app has been not minimised
+            // tell childs that his app has been not minimized
             let minimized_windows = this.state.minimized_windows;
             minimized_windows[objId] = false;
             this.setState({ minimized_windows: minimized_windows });
