@@ -29,8 +29,7 @@ export class Desktop extends Component {
                 desktop: false,
                 default: false,
             },
-            showNameBar: false,
-            first_visit: true
+            showNameBar: false
         }
     }
 
@@ -46,14 +45,11 @@ export class Desktop extends Component {
         let first_visit = localStorage.getItem('booting_screen');
 		if (first_visit !== null && first_visit !== undefined) {
 			// user has visited site before
-			this.setState({ first_visit: false });
 		} else {
             // user is visiting site for the first time
             let closed_windows = this.state.closed_windows;
-            let favorite_apps = this.state.favorite_apps;
 
             setTimeout(() => {
-                favorite_apps["about-adam"] = true; // adds opened app to sideBar
                 closed_windows["about-adam"] = false; // opens app's window
                 this.setState({ closed_windows, allAppsView: false }, this.focus("about-adam"));
                 this.app_stack.push("about-adam");
