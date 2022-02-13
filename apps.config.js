@@ -85,9 +85,9 @@ const apps = [
         id: "gedit",
         title: "Contact Me",
         icon: './themes/Yaru/apps/gedit.png',
-        disabled: false,
+        disabled: true,
         favorite: false,
-        desktop_shortcut: true,
+        desktop_shortcut: false,
         screen: displayGedit,
     },
 ]

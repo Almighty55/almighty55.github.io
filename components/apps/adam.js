@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 
 export class AboutAdam extends Component {
 
@@ -36,9 +35,6 @@ export class AboutAdam extends Component {
 
         // store this state
         localStorage.setItem("about-section", screen);
-
-        // google analytics
-        ReactGA.pageview(`/${screen}`);
 
         this.setState({
             screen: this.screens[screen],

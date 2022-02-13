@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Settings from '../apps/settings';
-import ReactGA from 'react-ga';
 import { displayTerminal } from '../apps/terminal'
 
 export class Window extends Component {
@@ -27,15 +26,11 @@ export class Window extends Component {
         this.id = this.props.id;
         this.setDefaultWindowDimension();
 
-        // google analytics
-        ReactGA.pageview(`/${this.id}`);
-
         // on window resize, resize boundary
         window.addEventListener('resize', this.resizeBoundaries);
     }
 
     componentWillUnmount() {
-        ReactGA.pageview("/desktop");
         window.removeEventListener('resize', this.resizeBoundaries);
     }
 
