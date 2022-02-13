@@ -117,7 +117,7 @@ function About() {
                 <div className="bg-white absolute rounded-full p-0.5 md:p-1 top-0 transform -translate-y-1/2 right-0"></div>
             </div>
             <ul className=" leading-tight tracking-tight text-sm md:text-base w-5/6 md:w-3/4 emoji-list">
-                <li className=" mt-3 list-time"> I am a team oriented individual. I thrive on developing skills through collaboration and questioning solutions.</li>
+                <li className=" mt-3 list-time"> I'm a very team oriented individual. I thrive on developing skills through collaboration and questioning solutions.</li>
                 <li className=" mt-3 list-building"> I enjoy building awesome scripts that solve tedious tasks.</li>
                 <li className=" list-pc"> Outside of work I love road biking. My common routes are the north branch trail and lakefront trail.</li>
                 <li className=" mt-3 list-star"> I also have a strong interest in finance & space!</li>
@@ -170,7 +170,7 @@ function Skills() {
             </div>
             <ul className=" tracking-tight text-sm md:text-base w-10/12 emoji-list">
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    I have a knack for automation primarily PowerShell and Python.
+                    I truly enjoy writing scripts primarily using PowerShell and Python.
                 </li>
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
                     <div> My areas of expertise are <strong className="text-ubt-gedit-orange"> break/fix, AWS & automation!</strong></div>
@@ -209,7 +209,7 @@ function Skills() {
             </div>
             <ul className=" tracking-tight text-sm md:text-base w-10/12 emoji-list mt-4">
                 <li className=" list-arrow text-sm md:text-base mt-4 leading-tight tracking-tight">
-                    <span> And of course OS:</span>
+                    <span> And of course operating systems:</span>
                     <img className=" inline ml-1" src="https://img.shields.io/badge/-Windows-0078D6?logo=windows" alt="Windows" />
                     <span>, </span>
                     <img className=" inline ml-1" src="https://img.shields.io/badge/-Apple-727272?logo=apple" alt="Apple" />
@@ -249,7 +249,7 @@ function Projects() {
             description: [
                 "Developed a PowerShell Script to automate data ingestion of externally hosted SFTP's and notify users upon ingestion.",
             ],
-            domains: ["PowerShell", "WinSCP", "NET Framework", "Automation"]
+            domains: ["PowerShell", "WinSCP", ".NET Framework", "Automation"]
         },
         {
             name: "Smart Home on a Budget",
