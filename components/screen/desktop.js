@@ -39,22 +39,17 @@ export class Desktop extends Component {
         this.setEventListeners();
         this.checkForNewFolders();
         this.checkForFirstVisit();
-    }
 
-    checkForFirstVisit = () => {
-        let first_visit = localStorage.getItem('booting_screen');
-		if (first_visit !== null && first_visit !== undefined) {
-			// user has visited site before
-		} else {
-            // user is visiting site for the first time
-            let closed_windows = this.state.closed_windows;
-
-            setTimeout(() => {
-                closed_windows["about-adam"] = false; // opens app's window
-                this.setState({ closed_windows, allAppsView: false }, this.focus("about-adam"));
-                this.app_stack.push("about-adam");
-            }, 200);
+        // by default open about me on first hit/refresh
+        let closed_windows = this.state.closed_windows;
+        let lastVisitedScreen = localStorage.getItem("about-section");
+        if (lastVisitedScreen === null || lastVisitedScreen === undefined) {
+            lastVisitedScreen = "about";
         }
+        setTimeout(() => {
+            closed_windows["about-adam"] = false; // opens app's window
+            this.setState({ closed_windows, allAppsView: false }, this.focus("about-adam"));
+        }, 200);
     }
 
     componentWillUnmount() {
