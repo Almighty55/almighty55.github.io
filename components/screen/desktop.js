@@ -38,7 +38,6 @@ export class Desktop extends Component {
         this.setContextListeners();
         this.setEventListeners();
         this.checkForNewFolders();
-        this.checkForFirstVisit();
 
         // by default open about me on first hit/refresh
         let closed_windows = this.state.closed_windows;
