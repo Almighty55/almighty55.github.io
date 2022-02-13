@@ -16,8 +16,8 @@ export default class Ubuntu extends Component {
 	}
 
 	componentDidMount() {
-		this.getLocalData();
 		this.lockScreen(); // show lock screen on each visit
+		this.getLocalData();
 	}
 
 	setTimeOutBootScreen = () => {
